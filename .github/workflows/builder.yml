@@ -21,6 +21,24 @@ jobs:
         pip install --upgrade pip
         pip install --user buildozer cython
 
+    - name: Install dependencies for GStreamer
+      run: |
+        sudo apt install -y meson ninja-build libglib2.0-dev libgstreamer1.0-dev \
+          libgstreamer-plugins-base1.0-dev gstreamer1.0-tools
+
+    - name: Compile and install GStreamer 1.26.0
+      run: |
+        git clone --branch 1.26.0 https://github.com/GStreamer/gstreamer.git
+        cd gstreamer
+        meson build
+        ninja -C build
+        sudo ninja -C build install
+        sudo ldconfig  # Actualizar la caché de bibliotecas dinámicas
+
+    - name: Verify GStreamer version
+      run: |
+        gst-inspect-1.0 --version
+
     - name: Install buildozer deps
       run: |
         sudo apt install -y python3-pip python3-dev ffmpeg \
@@ -41,4 +59,3 @@ jobs:
       with:
         name: KivyApp-APK
         path: bin/*.apk
-        
