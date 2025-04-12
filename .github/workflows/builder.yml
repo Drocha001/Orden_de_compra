@@ -1,0 +1,60 @@
+name: Python Kivy Project CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9  # Cambia la versión si es necesario
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        pytest tests/  # Asegúrate de tener un directorio `tests` con tus pruebas
+
+  package:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build distributable
+      run: |
+        pyinstaller --onefile main.py  # Ajusta según tu archivo principal
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: kivy-app
+        path: dist/  # Cambia si el ejecutable se genera en otro lugar
