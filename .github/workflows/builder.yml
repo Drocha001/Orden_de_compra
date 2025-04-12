@@ -1,4 +1,4 @@
-name: Build APK with Buildozer
+name: Build APK for Android
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
 
 jobs:
   build-apk:
-    runs-on: ubuntu-20.04  # Cambiar a una versión más estable
+    runs-on: ubuntu-20.04
 
     steps:
-    - name: Checkout repo
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Set up environment
@@ -21,33 +21,24 @@ jobs:
         pip install --upgrade pip
         pip install --user buildozer cython
 
-    - name: Install dependencies for GStreamer
-      run: |
-        sudo apt install -y meson ninja-build libglib2.0-dev \
-          libgstreamer-plugins-base1.26.0-dev gstreamer1.26.0-tools
-
-    - name: Compile and install GStreamer 1.26.0
-      run: |
-        git clone --branch 1.26.0 https://github.com/GStreamer/gstreamer.git
-        cd gstreamer
-        meson build
-        ninja -C build
-        sudo ninja -C build install
-        sudo ldconfig  # Actualizar la caché de bibliotecas dinámicas
-
-    - name: Verify GStreamer version
-      run: |
-        gst-inspect-1.26.0 --version
-
-    - name: Install buildozer deps
+    - name: Install dependencies for Buildozer
       run: |
         sudo apt install -y python3-pip python3-dev ffmpeg \
           libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-          gstreamer1.26.0-plugins-base gstreamer1.26.0-plugins-good gstreamer1.26.0-plugins-bad \
-          gstreamer1.26.0-plugins-ugly gstreamer1.26.0-libav gstreamer1.26.0-tools gstreamer1.26.0-x \
-          gstreamer1.26.0-alsa gstreamer1.26.0-pulseaudio
-        sudo apt install -y libffi-dev libssl-dev
-        sudo apt install -y liblzma-dev zlib1g-dev
+          gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
+          gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x \
+          gstreamer1.0-alsa gstreamer1.0-pulseaudio libffi-dev libssl-dev liblzma-dev zlib1g-dev
+
+    - name: Install Android SDK and NDK
+      run: |
+        sudo apt install -y wget
+        wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
+        mkdir -p $HOME/android/cmdline-tools
+        unzip cmdline-tools.zip -d $HOME/android/cmdline-tools
+        export ANDROID_HOME=$HOME/android
+        export PATH=$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools:$PATH
+        yes | sdkmanager --licenses
+        sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0" "ndk;21.4.7075529"
 
     - name: Build APK
       run: |
