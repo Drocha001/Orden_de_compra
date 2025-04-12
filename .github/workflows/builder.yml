@@ -35,11 +35,11 @@ jobs:
         wget https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip -O cmdline-tools.zip
         mkdir -p $HOME/android/cmdline-tools
         unzip cmdline-tools.zip -d $HOME/android/cmdline-tools
-        mv $HOME/android/cmdline-tools/cmdline-tools/* $HOME/android/cmdline-tools/  # Mover archivos al lugar correcto
+        mv $HOME/android/cmdline-tools/latest/cmdline-tools/* $HOME/android/cmdline-tools/latest/  # Mover archivos al lugar correcto
         export ANDROID_HOME=$HOME/android
-        export PATH=$ANDROID_HOME/cmdline-tools/bin:$ANDROID_HOME/platform-tools:$PATH
-        yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --licenses
-        $ANDROID_HOME/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0" "ndk;21.4.7075529"
+        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0" "ndk;21.4.7075529"
 
     - name: Build APK
       run: |
