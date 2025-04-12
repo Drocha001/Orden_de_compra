@@ -1,60 +1,40 @@
-name: Python Kivy Project CI/CD
+name: Build APK with Buildozer
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-apk:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9  # Cambia la versión si es necesario
-
-    - name: Install dependencies
+    - name: Set up environment
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        sudo apt update
+        sudo apt install -y build-essential ccache git zip unzip openjdk-11-jdk python3-pip python3-setuptools python3-wheel python3-venv libncurses5
+        pip install --upgrade pip
+        pip install --user buildozer cython
 
-    - name: Run tests
+    - name: Install buildozer deps
       run: |
-        pytest tests/  # Asegúrate de tener un directorio `tests` con tus pruebas
+        sudo apt install -y python3-pip python3-dev ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
+          libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev \
+          libgstreamer1.0 libgstreamer1.0-dev libmtdev-dev libgl1-mesa-dev libgles2-mesa-dev \
+          libgstreamer-plugins-base1.0-dev libffi-dev libjpeg-dev libpng-dev libfreetype6-dev
 
-  package:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: 3.9
-
-    - name: Install dependencies
+    - name: Build APK
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        export PATH=$PATH:~/.local/bin
+        buildozer android debug
 
-    - name: Build distributable
-      run: |
-        pyinstaller --onefile main.py  # Ajusta según tu archivo principal
-
-    - name: Upload artifact
+    - name: Upload APK
       uses: actions/upload-artifact@v3
       with:
-        name: kivy-app
-        path: dist/  # Cambia si el ejecutable se genera en otro lugar
+        name: KivyApp-APK
+        path: bin/*.apk
