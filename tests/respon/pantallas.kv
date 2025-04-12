@@ -1,0 +1,70 @@
+<CommonComponentLabel>:
+    halign: "center"
+
+<MobileView>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 10
+        Button:
+            text: "Mobil 1"
+        Button:
+            text: "Mobil 2"
+        Button:
+            text: "Mobil 3"
+
+<TabletView>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 10
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+            Button:
+                text: "Tablet 1"
+            Button:
+                text: "Tablet 2"
+        Button:
+            text: "Tablet 3"
+
+<DesktopView>:
+    BoxLayout:
+        orientation: "horizontal"
+        spacing: 10
+        padding: 10
+        Button:
+            text: "Escritorio 1"
+        Button:
+            text: "Escritorio 2"
+        Button:
+            text: "Escritorio 3"
+
+<PruebaPantalla>:
+    orientation: "vertical"
+    spacing: "10dp"
+    padding: "10dp"
+
+    MDLabel:
+        text: "Prueba de cambio de tema"
+        halign: "center"
+        font_style: "H4"
+
+    MDRaisedButton:
+        text: "Cambiar Tema"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.cambiar_tema()
+
+ResponsiveView:
+    mobile_view: mobile_view
+    tablet_view: tablet_view
+    desktop_view: desktop_view
+
+    MobileView:
+        id: mobile_view
+
+    TabletView:
+        id: tablet_view
+
+    DesktopView:
+        id: desktop_view

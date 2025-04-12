@@ -1,0 +1,26 @@
+BoxLayout:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    Label:
+        text: 'Menú de Opciones'
+        font_size: 24
+        size_hint_y: None
+        height: 50
+
+    Button:
+        text: 'Usuarios'
+        on_press: app.menu_opcion('usuarios')
+
+    Button:
+        text: 'Compras'
+        on_press: app.menu_opcion('compras')
+
+    Button:
+        text: 'Ventas'
+        on_press: app.menu_opcion('ventas')
+
+    Button:
+        text: 'Reportes'
+        on_press: app.menu_opcion('reportes')

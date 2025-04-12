@@ -1,0 +1,54 @@
+BoxLayout:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+    #size_hint: None, None  # Permitir establecer un tamaño fijo para el lienzo
+    #size: 500, 1000  # Tamaño del lienzo en píxeles (aproximadamente 5x10 cm en pantallas estándar)
+
+    Label:
+        text: 'Login'
+        font_size: 13.5  # Fuente reducida al 75% del tamaño original (18 * 0.75)
+        size_hint_y: None
+        height: 30  # Altura reducida al 75% del tamaño original (40 * 0.75)
+
+    TextInput:
+        id: username
+        hint_text: 'Usuario'
+        font_size: 12  # Fuente reducida al 75% del tamaño original (16 * 0.75)
+        multiline: False
+        size_hint: None, None
+        size: 144, 30  # Ancho ajustado para 20 caracteres y altura reducida
+        on_text_validate: password.focus = True  # Cambiar al siguiente campo al presionar Enter
+
+    TextInput:
+        id: password
+        hint_text: 'Contraseña'
+        password: True
+        font_size: 12
+        multiline: False
+        size_hint: None, None
+        size: 144, 30
+        on_text_validate: login_button.focus = True
+
+    Label:
+        id: error_message
+        text: ''
+        color: 1, 0, 0, 1  # Texto en rojo
+        font_size: 12
+        size_hint_y: None
+        height: 20
+
+    Button:
+        id: login_button
+        text: 'Iniciar Sesión'
+        font_size: 12
+        size_hint: None, None
+        size: 200, 30
+        on_press: app.login(username.text, password.text)
+
+    Button:
+        text: 'Salir'
+        font_size: 12
+        size_hint: None, None
+        size: 200, 30
+        on_press: app.salir()

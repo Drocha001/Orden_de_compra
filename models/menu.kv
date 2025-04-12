@@ -1,0 +1,40 @@
+<MenuPantalla>:
+    orientation: "vertical"
+    spacing: "10dp"
+    padding: "10dp"
+
+    MDLabel:
+        text: "Menú Principal"
+        halign: "center"
+        font_style: "H4"
+
+    MDRaisedButton:
+        text: "Cambiar Tema"
+        pos_hint: {"center_x": 0.5}
+        on_release: app.cambiar_tema()
+
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    MDTopAppBar:
+        title: "Menú Principal"
+        #left_action_items: [["menu", lambda x: app.abrir_menu_lateral()]]
+        elevation: 10
+
+    RecycleView:
+        id: menu_recycleview  # Asegúrate de que este ID sea único
+        viewclass: "CustomOneLineIconListItem"
+        RecycleBoxLayout:
+            orientation: "vertical"
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(10)
+
+<CustomOneLineIconListItem>:
+    text: root.text
+    #IconLeftWidget:
+        #icon: root.icon

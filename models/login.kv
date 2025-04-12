@@ -1,0 +1,47 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    MDTopAppBar:
+        title: "Login"
+        elevation: 10
+
+    MDLabel:
+        text: "Iniciar Sesión"
+        halign: "center"
+        font_style: "H5"
+
+    MDTextField:
+        id: username
+        hint_text: "Usuario"
+        font_size: 14
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5}
+
+    MDTextField:
+        id: password
+        hint_text: "Contraseña"
+        password: True
+        font_size: 14
+        size_hint_x: 0.8
+        pos_hint: {"center_x": 0.5}
+
+    MDLabel:
+        id: error_message
+        text: ""
+        halign: "center"
+        color: 1, 0, 0, 1  # Texto en rojo
+
+    MDRaisedButton:
+        id: login_button
+        text: "Iniciar Sesión"
+        size_hint_x: 0.5
+        pos_hint: {"center_x": 0.5}
+        on_press: app.login(username.text, password.text)
+
+    MDRaisedButton:
+        text: "Salir"
+        size_hint_x: 0.5
+        pos_hint: {"center_x": 0.5}
+        on_press: app.salir()

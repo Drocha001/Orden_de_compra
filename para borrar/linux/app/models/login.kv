@@ -1,0 +1,23 @@
+BoxLayout:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    Label:
+        text: 'Login'
+        font_size: 24
+        size_hint_y: None
+        height: 50
+
+    TextInput:
+        id: username
+        hint_text: 'Usuario'
+
+    TextInput:
+        id: password
+        hint_text: 'Contraseña'
+        password: True
+
+    Button:
+        text: 'Iniciar Sesión'
+        on_press: app.login(username.text, password.text)

@@ -1,0 +1,109 @@
+<CommonComponentLabel>:
+    halign: "center"
+
+<MobileView>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 10
+
+        Label:
+            text: "Vista actual: Móvil"
+            font_size: 20
+            halign: "center"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+            Label:
+                text: "Label 1"
+            Label:
+                text: "Label 2"
+            Label:
+                text: "Label 3"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+            TextInput:
+                hint_text: "Input 1"
+            TextInput:
+                hint_text: "Input 2"
+            TextInput:
+                hint_text: "Input 3"
+
+<TabletView>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 20
+        padding: 20
+
+        Label:
+            text: "Vista actual: Tableta"
+            font_size: 20
+            halign: "center"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 20
+            Label:
+                text: "Label 1"
+            Label:
+                text: "Label 2"
+            Label:
+                text: "Label 3"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 20
+            TextInput:
+                hint_text: "Input 1"
+            TextInput:
+                hint_text: "Input 2"
+            TextInput:
+                hint_text: "Input 3"
+
+<DesktopView>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 30
+        padding: 30
+
+        Label:
+            text: "Vista actual: Escritorio"
+            font_size: 20
+            halign: "center"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 30
+            Label:
+                text: "Label 1"
+            Label:
+                text: "Label 2"
+            Label:
+                text: "Label 3"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 30
+            TextInput:
+                hint_text: "Input 1"
+            TextInput:
+                hint_text: "Input 2"
+            TextInput:
+                hint_text: "Input 3"
+
+ResponsiveView:
+    mobile_view: mobile_view
+    tablet_view: tablet_view
+    desktop_view: desktop_view
+
+    MobileView:
+        id: mobile_view
+
+    TabletView:
+        id: tablet_view
+
+    DesktopView:
+        id: desktop_view

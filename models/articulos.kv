@@ -1,0 +1,35 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    MDTopAppBar:
+        title: "Gestión de Artículos"
+        left_action_items: [["arrow-left", lambda x: app.regresar_menu()]]
+        elevation: 10
+
+    ScrollView:
+        MDList:
+            OneLineIconListItem:
+                text: "Alta de Artículo"
+                on_press: app.alta_articulo()
+                IconLeftWidget:
+                    icon: "plus-box"
+
+            OneLineIconListItem:
+                text: "Consulta de Artículos"
+                on_press: app.consulta_articulos()
+                IconLeftWidget:
+                    icon: "magnify"
+
+            OneLineIconListItem:
+                text: "Modificar Artículo"
+                on_press: app.modificacion_articulo()
+                IconLeftWidget:
+                    icon: "pencil"
+
+            OneLineIconListItem:
+                text: "Baja de Artículo"
+                on_press: app.baja_articulo()
+                IconLeftWidget:
+                    icon: "delete"

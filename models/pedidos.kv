@@ -1,0 +1,35 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    MDTopAppBar:
+        title: "Gestión de Pedidos"
+        left_action_items: [["arrow-left", lambda x: app.regresar_menu()]]
+        elevation: 10
+
+    ScrollView:
+        MDList:
+            OneLineIconListItem:
+                text: "Crear Pedido"
+                on_press: app.crear_pedido()
+                IconLeftWidget:
+                    icon: "plus-box"
+
+            OneLineIconListItem:
+                text: "Consultar Pedidos"
+                on_press: app.consultar_pedidos()
+                IconLeftWidget:
+                    icon: "magnify"
+
+            OneLineIconListItem:
+                text: "Modificar Pedido"
+                on_press: app.modificar_pedido()
+                IconLeftWidget:
+                    icon: "pencil"
+
+            OneLineIconListItem:
+                text: "Eliminar Pedido"
+                on_press: app.eliminar_pedido()
+                IconLeftWidget:
+                    icon: "delete"

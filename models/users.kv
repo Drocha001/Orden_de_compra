@@ -1,0 +1,36 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    MDTopAppBar:
+        title: "Gestión de Usuarios"
+        left_action_items: [["arrow-left", lambda x: app.regresar_menu()]]
+        elevation: 10
+
+    ScrollView:
+        MDList:
+            id: users_mdlist  # Asegúrate de que este ID sea único
+            OneLineIconListItem:
+                text: "Alta de Usuario"
+                on_press: app.alta_usuario()
+                IconLeftWidget:
+                    icon: "account-plus"
+
+            OneLineIconListItem:
+                text: "Consulta de Usuarios"
+                on_press: app.consulta_usuarios()
+                IconLeftWidget:
+                    icon: "account-search"
+
+            OneLineIconListItem:
+                text: "Modificar Usuario"
+                on_press: app.modificacion_usuario()
+                IconLeftWidget:
+                    icon: "account-edit"
+
+            OneLineIconListItem:
+                text: "Baja de Usuario"
+                on_press: app.baja_usuario()
+                IconLeftWidget:
+                    icon: "account-remove"

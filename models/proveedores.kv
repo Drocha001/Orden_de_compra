@@ -1,0 +1,35 @@
+BoxLayout:
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+
+    MDTopAppBar:
+        title: "Gestión de Proveedores"
+        left_action_items: [["arrow-left", lambda x: app.regresar_menu()]]
+        elevation: 10
+
+    ScrollView:
+        MDList:
+            OneLineIconListItem:
+                text: "Alta de Proveedor"
+                on_press: app.alta_proveedor()
+                IconLeftWidget:
+                    icon: "account-plus"
+
+            OneLineIconListItem:
+                text: "Consulta de Proveedores"
+                on_press: app.consulta_proveedores()
+                IconLeftWidget:
+                    icon: "account-search"
+
+            OneLineIconListItem:
+                text: "Modificar Proveedor"
+                on_press: app.modificacion_proveedor()
+                IconLeftWidget:
+                    icon: "account-edit"
+
+            OneLineIconListItem:
+                text: "Baja de Proveedor"
+                on_press: app.baja_proveedor()
+                IconLeftWidget:
+                    icon: "account-remove"

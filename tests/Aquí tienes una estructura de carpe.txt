@@ -1,0 +1,135 @@
+Aquí tienes una estructura de carpetas bien organizada para tu aplicación en Kivy con un backend en Flask o FastAPI, asegurando coherencia y facilidad de mantenimiento.
+📂 ProyectoOrdenesCompra/
+│
+├── 📂 backend/ (API y base de datos)
+│ ├── 📂 app/ (Código principal del backend)
+│ │ ├── 📂 routes/ (Rutas del API)
+│ │ │ ├── pedidos.py
+│ │ │ ├── usuarios.py
+│ │ │ ├── proveedores.py
+│ │ ├── 📂 models/ (Modelos de la base de datos)
+│ │ │ ├── pedido.py
+│ │ │ ├── usuario.py
+│ │ │ ├── proveedor.py
+│ │ ├── 📂 schemas/ (Esquemas de validación con Pydantic)
+│ │ ├── 📂 services/ (Lógica de negocio y sincronización)
+│ │ ├── init.py
+│ │ ├── database.py (Conexión con MySQL)
+│ │ ├── config.py (Configuración global del backend)
+│ ├── main.py (Punto de entrada del backend)
+│ ├── requirements.txt (Dependencias de Python)
+│ ├── Dockerfile (Para despliegue con Docker, opcional)
+│
+├── 📂 mobile_app/ (Aplicación en Kivy)
+│ ├── 📂 assets/ (Imágenes, íconos, fuentes, etc.)
+│ ├── 📂 kv/ (Archivos .kv para la interfaz gráfica)
+│ ├── 📂 screens/ (Pantallas de la app Kivy)
+│ │ ├── login_screen.py
+│ │ ├── pedidos_screen.py
+│ │ ├── proveedores_screen.py
+│ ├── 📂 widgets/ (Componentes reutilizables de la UI)
+│ │ ├── custom_button.py
+│ │ ├── popup_confirm.py
+│ ├── 📂 database/ (Base de datos SQLite local y sincronización)
+│ │ ├── sync.py (Sincronización con MySQL remoto)
+│ │ ├── local_db.py (Conexión SQLite local)
+│ ├── 📂 utils/ (Funciones auxiliares y de configuración)
+│ │ ├── helpers.py
+│ │ ├── constantes.py
+│ ├── main.py (Punto de entrada de la app móvil)
+│ ├── buildozer.spec (Archivo de configuración para Android)
+│
+├── 📂 tests/ (Pruebas unitarias y de integración)
+│ ├── test_api.py
+│ ├── test_sync.py
+│
+├── README.md (Documentación del proyecto)
+├── .gitignore (Archivos a ignorar en Git)
+│
+📌 Explicación:
+✔ Separación clara entre backend y frontend móvil.
+✔ Modularización de código (pantallas, widgets, modelos, rutas, etc.).
+✔ Carpeta database/ para sincronización entre MySQL y SQLite.
+✔ Carpeta kv/ para archivos de interfaz .kv separados.
+✔ Carpeta utils/ para constantes y funciones auxiliares.
+💡 Beneficio: Con esta estructura, puedes mantener un código limpio, escalable y fácil de mantener. 🚀
+
+📂 backend/ (API y base de datos)
+📌 Maneja la comunicación con la base de datos y expone una API para que la app móvil pueda interactuar.
+•	📂 app/ (Código principal del backend)
+o	📂 routes/ → Define las rutas de la API.
+	pedidos.py →
+python
+CopiarEditar
+from fastapi import APIRouter  
+router = APIRouter()  
+
+@router.get("/pedidos")  
+def get_pedidos():  
+    return {"mensaje": "Lista de pedidos"}  
+o	📂 models/ → Define la estructura de la base de datos.
+	pedido.py →
+python
+CopiarEditar
+from sqlalchemy import Column, Integer, String  
+from database import Base  
+
+class Pedido(Base):  
+    __tablename__ = "pedidos"  
+    id = Column(Integer, primary_key=True, index=True)  
+    descripcion = Column(String, index=True)  
+o	📂 schemas/ → Define validaciones de datos.
+	pedido.py →
+python
+CopiarEditar
+from pydantic import BaseModel  
+
+class PedidoSchema(BaseModel):  
+    id: int  
+    descripcion: str  
+o	📂 services/ → Contiene lógica de negocio.
+________________________________________
+📂 mobile_app/ (Aplicación Kivy)
+📌 Contiene la interfaz y la lógica de la app en Kivy.
+•	📂 assets/ → Guarda imágenes, íconos, fuentes.
+•	📂 kv/ → Guarda los archivos .kv para definir la interfaz.
+o	main.kv →
+kv
+CopiarEditar
+BoxLayout:
+    Label:
+        text: "Bienvenido a la App"
+•	📂 screens/ → Contiene las diferentes pantallas de la app.
+o	login_screen.py →
+python
+CopiarEditar
+from kivy.uix.screenmanager import Screen  
+
+class LoginScreen(Screen):  
+    pass  
+•	📂 widgets/ → Componentes reutilizables (botones personalizados, popups).
+•	📂 database/ → Maneja la sincronización con la base de datos.
+o	sync.py → Código para sincronizar MySQL con SQLite.
+•	📂 utils/ → Funciones auxiliares.
+o	helpers.py → Funciones de formateo de fechas, validaciones, etc.
+________________________________________
+📂 tests/ (Pruebas unitarias y de integración)
+📌 Aquí se escriben pruebas automatizadas para verificar que todo funciona bien.
+Ejemplo de prueba en FastAPI:
+python
+CopiarEditar
+from fastapi.testclient import TestClient  
+from main import app  
+
+client = TestClient(app)  
+
+def test_get_pedidos():  
+    response = client.get("/pedidos")  
+    assert response.status_code == 200  
+________________________________________
+💡 Resumen:
+•	backend → API y base de datos.
+•	mobile_app → Aplicación Kivy.
+•	tests → Pruebas para verificar el sistema.
+📌 ¡Con esta estructura, tu código será más fácil de mantener y escalar! 🚀
+
