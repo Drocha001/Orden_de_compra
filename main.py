@@ -7,6 +7,7 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 
 # Agregar el directorio que contiene abm.py al PYTHONPATH
+# version 0.0.1
 sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
 from utils.abm import ejecutar_operacion
 
