@@ -21,16 +21,6 @@ jobs:
         pip install --upgrade pip
         pip install --user buildozer cython
 
-    - name: Clone and build GStreamer
-      run: |
-        sudo apt install -y meson ninja-build
-        git clone https://github.com/GStreamer/gstreamer.git
-        cd gstreamer
-        meson build
-        ninja -C build
-        sudo ninja -C build install
-        sudo ldconfig  # Actualizar la caché de bibliotecas dinámicas
-
     - name: Install buildozer deps
       run: |
         sudo apt install -y python3-pip python3-dev ffmpeg \
@@ -51,3 +41,4 @@ jobs:
       with:
         name: KivyApp-APK
         path: bin/*.apk
+        
