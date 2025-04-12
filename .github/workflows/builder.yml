@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies for GStreamer
       run: |
         sudo apt install -y meson ninja-build libglib2.0-dev \
-          libgstreamer-plugins-base1.0-dev gstreamer1.0-tools
+          libgstreamer-plugins-base1.26.0-dev gstreamer1.26.0-tools
 
     - name: Compile and install GStreamer 1.26.0
       run: |
@@ -37,15 +37,15 @@ jobs:
 
     - name: Verify GStreamer version
       run: |
-        gst-inspect-1.0 --version
+        gst-inspect-1.26.0 --version
 
     - name: Install buildozer deps
       run: |
         sudo apt install -y python3-pip python3-dev ffmpeg \
           libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-          gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad \
-          gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x \
-          gstreamer1.0-alsa gstreamer1.0-pulseaudio
+          gstreamer1.26.0-plugins-base gstreamer1.26.0-plugins-good gstreamer1.26.0-plugins-bad \
+          gstreamer1.26.0-plugins-ugly gstreamer1.26.0-libav gstreamer1.26.0-tools gstreamer1.26.0-x \
+          gstreamer1.26.0-alsa gstreamer1.26.0-pulseaudio
         sudo apt install -y libffi-dev libssl-dev
         sudo apt install -y liblzma-dev zlib1g-dev
 
